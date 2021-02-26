@@ -43,7 +43,7 @@ Anther reason why I chose option 2 is that Option 1 doesn't scale well. If I'd w
 
 After these changes, I was able to run & view the index page on http://localhost:8080/
 There could also be other explainations why "404 not found" could occur when running the app in container. Some of the more common ones is:
-- Trying to access http://localhost:9999/ instead of http://localhost:8080/
+- Trying to access http://localhost:9999/ instead of http://localhost:8080/ when application is running in docker
 - Missing argument -p 8080:9999 when running ````docker run...```` 
 
 
