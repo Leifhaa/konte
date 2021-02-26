@@ -24,14 +24,22 @@ In summary, this command will start a container of the latest image on our local
 
 #####Handling "404 not found"
 The original code would return a "404 not found" whenever run in container. Personally I experienced this due to index.html not being found inside the docker. This could be fixed in several ways:
-Option 1. Copy the index.html along with pom.xml & src folder in the docker file.
-Option 2. Move the index.html inside the src folder.
+########Option 1 - Adapting the docker file
+Add the following command in stage 2 of the docker file:
+```
+FROM adoptopenjdk/openjdk11:alpine-slim
+WORKDIR /app
+COPY --from=builder /app/target/*.jar application.jar
+COPY index.html .                     (<------------- ADDED LINE)
+ENTRYPOINT ["java", "-jar", "application.jar"]
+```
+This will copy the index.html into the app directory as well, and our application is able to access index.html when running in docker
 
-I chose option 2 as I think believe it's a better option for keeping a tidy structure. Option 2 causes another problem however, the DemoController refers to an non-existing file path. In order to solve this, I saw 2 options:
-Option 1. Change the path of FileInputStream in DemoController.hello to the new location of index.html
-Option 2. Move the Index.html inside resource/static, allowing spring boot to serve the index.html by default without a need from a controller.
+########Option 2 - Moving the index.html file
+Moving the index.html file inside src/main/resource/static would allow spring boot to serve the index.html by default without a need from a controller. Spring boot will automatically add static web sources located in such directory
 
-I chose option 2 and removed the logic from the controller as my understanding is that we're allowed to do such architectural changes. I chosed option 2 as I believe this is a more common way of serving static content, and this is how my previous classes has served static content.
+I chose option 2 and removed the logic from the controller as this was no longer necessary. I interpreted that we're allowed to do such architectural changes. An argument for choosing option 2 is that I believe this is a more common way of serving static content, and this is how my previous classes has served static content.
+Anther reason why I chose option 2 is that Option 1 doesn't scale well. If I'd want to add a new .html file, I'd also have to add a new COPY command inside docker file which opens for more errors.
 
 After these changes, I was able to run & view the index page on http://localhost:8080/
 There could also be other explainations why "404 not found" could occur when running the app in container. Some of the more common ones is:
