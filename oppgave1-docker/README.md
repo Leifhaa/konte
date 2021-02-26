@@ -28,7 +28,7 @@ Option 1. Copy the index.html along with pom.xml & src folder in the docker file
 Option 2. Move the index.html inside the src folder.
 
 I chose option 2 as I think believe it's a better option for keeping a tidy structure. Option 2 causes another problem however, the DemoController refers to an non-existing file path. In order to solve this, I saw 2 options:
-Option 1. Change the path in DemoController to the new location of index.html
+Option 1. Change the path of FileInputStream in DemoController.hello to the new location of index.html
 Option 2. Move the Index.html inside resource/static, allowing spring boot to serve the index.html by default without a need from a controller.
 
 I chose option 2 and removed the logic from the controller as my understanding is that we're allowed to do such architectural changes. I chosed option 2 as I believe this is a more common way of serving static content, and this is how my previous classes has served static content.
