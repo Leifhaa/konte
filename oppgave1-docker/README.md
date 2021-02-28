@@ -38,12 +38,13 @@ COPY --from=builder /app/target/*.jar application.jar
 + COPY index.html .                     
 ENTRYPOINT ["java", "-jar", "application.jar"]
 ```
-This will copy the index.html into the app directory as well, and our application is able to access index.html when running in docker
+This will copy the `index.html` into the app directory as well, and our application is able to access index.html when running in docker
 
 #### Option 2 - Moving the index.html file
-Moving the index.html file inside src/main/resource/static would allow spring boot to serve the index.html by default without a need from a controller. Spring boot will automatically add static web sources located in such directory
+Moving the `index.html` file inside `src/main/resource/static` would allow spring boot to serve the index.html by default without the need of a controller. This requires no adjustments in the docker file
 
-I chose option 2 and removed the logic from the controller as this was no longer necessary. I interpreted that we're allowed to do such architectural changes. An argument for choosing option 2 is that I believe this is a more common way of serving static content, and this is how my previous classes has served static content.
+### Selecting an option
+I chose option 2 and removed the logic from the controller as this was no longer necessary. I interpreted that we're allowed to do such architectural changes. If moving `index.html` would not be allowed, or changing the controller logic was not OK then option 2 would be out of scope. An argument for choosing option 2 is that I believe this is a more common way of serving static content, and this is how my previous classes has served static content.
 Anther reason why I chose option 2 is that Option 1 doesn't scale well. If I'd want to add a new .html file, I'd also have to add a new COPY command inside docker file which opens for more errors.
 
 After these changes, I was able to run & view the index page on http://localhost:8080/
