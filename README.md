@@ -62,7 +62,7 @@ There could also be other explainations why "404 not found" could occur when run
 - Missing argument -p 8080:9999 when running ````docker run...```` 
 
 # Travis & Google Cloud 
-:information_source: This is not a task in the exam. Completing this part is not necessary and can be skipped :information_source: <br />
+:information_source: *This is not a task in the exam. Completing this part is not necessary and can be skipped* :information_source: <br />
 I decided to add an extension to the project, allowing travis to build the docker image for us and deploying it on Google. Here's a brief explanation of how:
 " 
 
