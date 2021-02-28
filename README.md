@@ -67,7 +67,19 @@ There could also be other explainations why "404 not found" could occur when run
 I decided to add an extension to the project, allowing travis to build the docker image for us and deploying it on Google. Here's a brief explanation of how. Before following this guide, it's important that you've already:
  -  Already Created a Google Project and Service Account. Otherwise, refer to [this guide](#https://github.com/Leifhaa/PGR301-2020-konte-oppgave2#guide-1-creating-a-google-cloud-project-and-google-service-account)
 
-## 1. Edit Travis file
+## 1. Move Travis file
+In order to active travis for building and deploying the docker image, move the `.travis.yml` located in `/travis` directory to the root directory as shown below:
+```diff
+-/travis/.travis.yml
++.travis.yml
+pom.xml
+README.md
+Dockerfile
+src
+...
+```
+
+## 2. Edit Travis file
 Open the `.travis.yml` located in the root directory. Insert your Google Cloud project ID
 ```diff
 env:
@@ -77,8 +89,10 @@ env:
 ...
 ```
 
-## 2. Append service account key file
+## 3. Append service account key file
 Travis needs a key file in order authenticate and push the built image to google. Complete step 5 and 6 in [this guide](#https://github.com/Leifhaa/PGR301-2020-konte-oppgave2#5-encrypt-service-account-key-file) for adding a keyfile to travis, but replace ```terraform_keyfile.json``` with ```google_keyfile.json``` while completing the steps.
 
+## 4 Trigger a travis build
+Trigger a travis build by committing a change to main/master branch. After a couple of minutes, you should have a docker image in your Google Container Registry. Travis built it for us! :clap:
 Todo: Må enable API's:
 https://stackoverflow.com/questions/58733523/google-cloud-platform-warning-you-do-not-appear-to-have-access-to-project-pro
