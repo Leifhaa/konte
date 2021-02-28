@@ -70,7 +70,6 @@ There could also be other explainations why "404 not found" could occur when run
 I decided to add an extension to the project, allowing travis to build the docker image for us and deploying it on Google. Here's a brief explanation of how. Before following this guide, it's important that you've already:
  -  Created a Google Project and Service Account. Otherwise, refer to [this guide](https://github.com/Leifhaa/PGR301-2020-konte-oppgave2#guide-1-creating-a-google-cloud-project-and-google-service-account)
  -  Enabled Container Registry API in Google Cloud Console.
- -  Enabled App Engine Admin API in Google Cloud Console.
  -  Enabled Cloud Resource Manager API in Google Cloud Console
 
 ## 1. Move Travis file
