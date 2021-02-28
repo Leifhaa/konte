@@ -3,7 +3,7 @@
 ![](./docs/docker.png) <br>
 
 ## Introduction
-This is repository 1/2 of [exam in lecture pgr301 (Continuation exam)](https://github.com/Leifhaa/PGR301-2020-konte-oppgave2/tree/master/docs). Repository 2/2 can be found [here](https://github.com/Leifhaa/PGR301-2020-konte-oppgave2). This repository is forked from the original repository [here](https://github.com/PGR301-2020/konte). The original repository has the spring application located in `oppgave1-docker` directory. I have moved the application so it's now instead in the root of this directory.
+This is repository 1/2 of [exam in lecture pgr301 (Continuation exam)](https://github.com/Leifhaa/PGR301-2020-konte-oppgave2/tree/master/docs). Repository 2/2 can be found [here](https://github.com/Leifhaa/PGR301-2020-konte-oppgave2). This repository is forked from the original repository [here](https://github.com/PGR301-2020/konte). The original repository has the spring application located in `/oppgave1-docker` directory. I have moved the application, so it's now instead in the root of this directory.
 * This repository answers task 1 of the exam.
 
 ## Prerequisites before running the guides:
