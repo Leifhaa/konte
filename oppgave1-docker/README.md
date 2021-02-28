@@ -50,6 +50,8 @@ I chose option 2 and removed the logic from the controller as this was no longer
 An argument for choosing option 2 is that I believe this is a more common way of serving static content, and this is how my previous classes has served static content. Anther reason why I chose option 2 is that Option 1 doesn't scale well. If I'd want to add a new .html file, I'd also have to add a new COPY command inside docker file which opens for more errors.
 
 After these changes, I was able to run & view the index page on http://localhost:8080/
+
+#### Other reasons for 404
 There could also be other explainations why "404 not found" could occur when running the app in container. Some of the more common ones is:
 - Trying to access http://localhost:9999/ instead of http://localhost:8080/ when application is running in docker
 - Missing argument -p 8080:9999 when running ````docker run...```` 
