@@ -64,5 +64,14 @@ There could also be other explainations why "404 not found" could occur when run
 # Travis & Google Cloud 
 :information_source: *This is not a task in the exam. Completing this part is not necessary and can be skipped* :information_source: <br />
 I decided to add an extension to the project, allowing travis to build the docker image for us and deploying it on Google. Here's a brief explanation of how:
-" 
+
+##1. Edit Travis file
+Edit the `.travis.yml` located in the root directory. Insert your Google Cloud project ID
+```diff
+env:
+  global:
+-    - GCP_PROJECT_ID=decisive-mapper-306016
++    - GCP_PROJECT_ID=your-project-id
+...
+```
 
