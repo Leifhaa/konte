@@ -1,24 +1,29 @@
-Assignemnt can be found here:
-https://github.com/PGR301-2020/konte
+# Multistage docker build
+
+## Introduction
+This is repository 1/2 of [exam in lecture pgr301 (Continuation exam)](https://github.com/Leifhaa/PGR301-2020-konte-oppgave2/tree/master/docs). Repository 2/2 can be found [here](https://github.com/Leifhaa/PGR301-2020-konte-oppgave2).
 
 ## Task 1 - Docker 
 ### Task A
-This project contains a docker file for creating a Container Image of the spring boot application.
-Run the following command to do so:
-```bash
+This project contains a multistaged docker file named `Dockerfile` for creating a Container Image of the spring boot application.<br />
+For creating a docker image, open terminal in root directory and run:
+```shell script
 docker build . --tag konte
 ```
 
 ###Task B
 In order to run a container of the newest container image, run the following command:
-```bash
+```shell script
 docker run -d --name hello-konte -p 8080:9999  konte:latest
 ```
-#####Description of the arguments:
-- ```-d``` : Run detached, means that docker container runs in the background of the terminal.
-- ```--name hello-konte```: Assigns a name to the container, otherwise this name is randomly created.
-- ```-p 8080:9999``` : Forwarding ports, so a request on 8080 to our machine, is forwarded to port 9999 in the container
-- ```'konte:latest'``` : Specifies which container image to run, following by which tag (latest in this case)
+Here's a discription of the arguments
+
+| Argument | Description |
+| --- | --- |
+| -d | Run detached, means that docker container runs in the background of the terminal. |
+| --name hello-konte | Assigns a name to the container, otherwise this name is randomly created. |
+| -p 8080:9999 | Forwarding ports, so a request on 8080 to our machine, is forwarded to port 9999 in the container |
+| konte:latest | Specifies which container image to run, following by which tag (latest in this case) |
 
 In summary, this command will start a container of the latest image on our local port 8080
 
