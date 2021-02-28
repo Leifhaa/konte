@@ -61,14 +61,13 @@ There could also be other explainations why "404 not found" could occur when run
 - Trying to access http://localhost:9999/ instead of http://localhost:8080/ when application is running in docker
 - Missing argument -p 8080:9999 when running ````docker run...```` 
 
-# Travis & Google Cloud 
-:information_source: *This is not a task in the exam. Completing this part is not necessary and can be skipped* :information_source: <br />
+# Travis & Google Container Registry
+:information_source: *This is not a task in the exam. Completing this part is not necessary and can be skipped*. :information_source: <br />
 I decided to add an extension to the project, allowing travis to build the docker image for us and deploying it on Google. Here's a brief explanation of how. Before following this guide, it's important that you've already:
  -  Already Created a Google Project and Service Account. Otherwise, refer to [this guide](#https://github.com/Leifhaa/PGR301-2020-konte-oppgave2#guide-1-creating-a-google-cloud-project-and-google-service-account)
- -  Encrypted the key file for the service account. Otherwise refer to [this guide](#https://github.com/Leifhaa/PGR301-2020-konte-oppgave2#5-encrypt-service-account-key-file)
 
 ## 1. Edit Travis file
-Edit the `.travis.yml` located in the root directory. Insert your Google Cloud project ID
+Open the `.travis.yml` located in the root directory. Insert your Google Cloud project ID
 ```diff
 env:
   global:
@@ -77,14 +76,6 @@ env:
 ...
 ```
 
-## 2. Append the encrypted key file
-Add the encrypted file to the root directory. It should be named `google-key.json.enc. Commit it by running these commands in order
-```shell script
-git add google-keyfile.json.enc
-git commit -m "Updated service account"
-git push -u origin master
-```
-:warning: **The original unencrypted google-key.keyfile.json file should not be committed to repository or shared** :warning:\
-
-## 3. `
+## 2. Append service account key file
+Travis needs a key file in order authenticate and push the built image to google. Complete step 5 and 6 in [this guide](#https://github.com/Leifhaa/PGR301-2020-konte-oppgave2#5-encrypt-service-account-key-file) for adding a keyfile to travis, but replace ```terraform_keyfile.json``` with ```google_keyfile.json``` while completing the steps
 
