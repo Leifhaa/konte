@@ -30,7 +30,7 @@ In summary, this command will start a container of the latest image accessible o
 ### Handling "404 not found"
 The original code would return a "404 not found" whenever ran in container. Personally I experienced this due to index.html not being found inside the docker. This could be fixed in several ways:
 #### Option 1 - Adapting the docker file
-Add the following command in stage 2 of the docker file:
+Adding command for copying index.html file in stage 2 of the docker file as shown below:
 ``` diff
 FROM adoptopenjdk/openjdk11:alpine-slim
 WORKDIR /app
