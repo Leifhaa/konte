@@ -21,7 +21,7 @@ In order to run a container of the newest container image, run the following com
 ```shell script
 docker run -d --name hello-konte -p 8080:9999  konte:latest
 ```
-Here's a discription of the arguments
+Here's a description of the arguments
 
 | Argument | Description |
 | --- | --- |
