@@ -1,0 +1,4 @@
+set -ex;
+docker build -t "${IMAGE}:${TRAVIS_COMMIT}" -t "${IMAGE}:latest" . && \
+docker push "${IMAGE}" && \
+set +x
