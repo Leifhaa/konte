@@ -35,7 +35,7 @@ Add the following command in stage 2 of the docker file:
 FROM adoptopenjdk/openjdk11:alpine-slim
 WORKDIR /app
 COPY --from=builder /app/target/*.jar application.jar
-+ COPY index.html .                     (<------------- ADDED LINE)
++ COPY index.html .                     
 ENTRYPOINT ["java", "-jar", "application.jar"]
 ```
 This will copy the index.html into the app directory as well, and our application is able to access index.html when running in docker
