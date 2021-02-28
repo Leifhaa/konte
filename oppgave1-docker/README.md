@@ -11,7 +11,7 @@ For creating a docker image, open terminal in root directory and run:
 docker build . --tag konte
 ```
 
-###Task B
+### Task B
 In order to run a container of the newest container image, run the following command:
 ```shell script
 docker run -d --name hello-konte -p 8080:9999  konte:latest
