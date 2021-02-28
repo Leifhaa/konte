@@ -85,12 +85,16 @@ src
 ```
 
 ## 2. Edit Travis file
-Open the `.travis.yml` located in the root directory. Insert your Google Cloud project ID
+Open the `.travis.yml` located in the root directory. Insert your Google Cloud project ID in the global variables GCP_PROJECT_ID and IMAGE as shown below:
 ```diff
 env:
   global:
 -    - GCP_PROJECT_ID=decisive-mapper-306016
 +    - GCP_PROJECT_ID=your-project-id
+-    - IMAGE=gcr.io/konteproj0/helloworld
++    - IMAGE=gcr.io/your-project-id/helloworld
+
+
 ...
 ```
 
