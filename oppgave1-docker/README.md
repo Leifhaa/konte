@@ -44,8 +44,10 @@ This will copy the `index.html` into the app directory as well, and our applicat
 Moving the `index.html` file inside `src/main/resource/static` would include it in the .jar file and allow spring boot to serve the `index.html` by default. This means there's longer need for the controller to serve the `index.html`. This option requires no adjustments in the docker file
 
 ### Selecting an option
-I chose option 2 and removed the logic from the controller as this was no longer necessary. I interpreted that we're allowed to do such architectural changes. If moving `index.html` would not be allowed, or changing the controller logic was not OK then option 2 would be out of scope. <br />An argument for choosing option 2 is that I believe this is a more common way of serving static content, and this is how my previous classes has served static content.
-Anther reason why I chose option 2 is that Option 1 doesn't scale well. If I'd want to add a new .html file, I'd also have to add a new COPY command inside docker file which opens for more errors.
+I chose option 2 and removed the logic from the controller as this was no longer necessary. I interpreted that we're allowed to do such architectural changes. If moving `index.html` would not be allowed, or changing the controller logic was not OK then option 2 would be out of scope. 
+<br />
+<br />
+An argument for choosing option 2 is that I believe this is a more common way of serving static content, and this is how my previous classes has served static content. Anther reason why I chose option 2 is that Option 1 doesn't scale well. If I'd want to add a new .html file, I'd also have to add a new COPY command inside docker file which opens for more errors.
 
 After these changes, I was able to run & view the index page on http://localhost:8080/
 There could also be other explainations why "404 not found" could occur when running the app in container. Some of the more common ones is:
