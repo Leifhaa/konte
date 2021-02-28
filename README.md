@@ -5,7 +5,7 @@
 ## Introduction
 This is repository 1/2 of [exam in lecture pgr301 (Continuation exam)](https://github.com/Leifhaa/PGR301-2020-konte-oppgave2/tree/master/docs). Repository 2/2 can be found [here](https://github.com/Leifhaa/PGR301-2020-konte-oppgave2). This repository is forked from the original repository [here](https://github.com/PGR301-2020/konte). The original repository has the spring application located in `/oppgave1-docker` directory. I have moved the application, so it's now instead in the root of this directory.
 * The first part of this readme ([Task 1. Docker](#Task-1-Docker)) answers task 1 of the exam
-* The last part of this readme ([Travis and Google Container Registry](#Travis-and-Google-Container-Registry)) is not a task in the exam and can be skipped. It's an extension to task 1.
+* The last part of this readme ([Travis and Google Container Registry](#Travis-and-Google-Container-Registry)) is not a task in the exam and can be skipped. It's an extension of task 1.
 
 ## Prerequisites before running the guides:
 * Installed Terraform (https://www.terraform.io/downloads.html)
