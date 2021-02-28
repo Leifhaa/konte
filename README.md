@@ -68,7 +68,7 @@ There could also be other explainations why "404 not found" could occur when run
 ![](./docs/docker-travis-registry.png) <br>
 :information_source: *This is not a task in the exam. Completing this part is not necessary and can be skipped*. :information_source: <br />
 I decided to add an extension to the project, allowing travis to build the docker image for us and deploying it on Google. Here's a brief explanation of how. Before following this guide, it's important that you've already:
- -  Created a Google Project and Service Account. Otherwise, refer to [this guide](https://github.com/Leifhaa/PGR301-2020-konte-oppgave2#guide-1-creating-a-google-cloud-project-and-google-service-account)
+ -  Created a Google Project and a Service Account with Storage Admin role. Otherwise, refer to [this guide](https://github.com/Leifhaa/PGR301-2020-konte-oppgave2#guide-1-creating-a-google-cloud-project-and-google-service-account)
  -  Enabled Container Registry API in Google Cloud Console.
  -  Enabled Cloud Resource Manager API in Google Cloud Console
 
@@ -100,7 +100,7 @@ env:
 
 ## 3. Append service account key file
 Travis needs a key file in order authenticate and push the built image to google. Complete step 5 and 6 in [this guide](https://github.com/Leifhaa/PGR301-2020-konte-oppgave2#5-encrypt-service-account-key-file) for adding a keyfile to travis, but replace ```terraform_keyfile.json``` with ```google_keyfile.json``` while completing the steps.
-
+>Notice: This repository has 'main' branch instead of 'master'
 ## 4 Trigger a travis build
 Trigger a travis build by committing a change to main/master branch. After a couple of minutes, you should have a docker image in your Google Container Registry. Travis built it for us! :clap:
 Todo: Må enable API's:
