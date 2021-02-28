@@ -100,7 +100,7 @@ env:
 
 ## 3. Append service account key file
 Travis needs a key file in order authenticate and push the built image to google. Complete step 5 and 6 in [this guide](https://github.com/Leifhaa/PGR301-2020-konte-oppgave2#5-encrypt-service-account-key-file) for adding a keyfile to travis, but replace ```terraform_keyfile.json``` with ```google_keyfile.json``` while completing the steps.
->Notice: This repository has 'main' branch instead of 'master'
+>Notice: Replace master with main when pushing as this repository has a main branch.
 ## 4 Trigger a travis build
 Trigger a travis build by committing a change to main/master branch. After a couple of minutes, you should have a docker image in your Google Container Registry. Travis built it for us! :clap:
 Todo: Må enable API's:
