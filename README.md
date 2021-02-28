@@ -78,7 +78,13 @@ env:
 ```
 
 ## 2. Append the encrypted key file
-Add the encrypted file to the root directory. It should be named `google-key.json.enc
+Add the encrypted file to the root directory. It should be named `google-key.json.enc. Commit it by running these commands in order
+```shell script
+git add google-keyfile.json.enc
+git commit -m "Updated service account"
+git push -u origin master
+```
+:warning: **The original unencrypted google-key.keyfile.json file should not be committed to repository or shared** :warning:\
 
 ## 3. `
 
