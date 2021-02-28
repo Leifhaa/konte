@@ -1,10 +1,10 @@
 # Multistage docker build
+![](./docs/docker.png) <br>
 
 ## Introduction
 This is repository 1/2 of [exam in lecture pgr301 (Continuation exam)](https://github.com/Leifhaa/PGR301-2020-konte-oppgave2/tree/master/docs). Repository 2/2 can be found [here](https://github.com/Leifhaa/PGR301-2020-konte-oppgave2).
 
 ## Task 1 - Docker 
-![](./docs/docker.png) <br>
 ### Task A
 This project contains a multistaged docker file named `Dockerfile` for creating a Container Image of the spring boot application.<br />
 For creating a docker image, open terminal in root directory and run:
