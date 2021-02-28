@@ -27,7 +27,7 @@ before_install:
   - curl https://sdk.cloud.google.com | bash > /dev/null
   - source "$HOME/google-cloud-sdk/path.bash.inc"
   #Use the encrypted file for activating google service account.
-  - gcloud auth activate-service-account --key-file=google_keyfile.json
+  - gcloud auth activate-service-account --key-file=terraform_keyfile.json
   - gcloud auth configure-docker
   - gcloud config set project "${GCP_PROJECT_ID}"
 
