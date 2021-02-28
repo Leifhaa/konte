@@ -40,7 +40,7 @@ ENTRYPOINT ["java", "-jar", "application.jar"]
 ```
 This will copy the index.html into the app directory as well, and our application is able to access index.html when running in docker
 
-########Option 2 - Moving the index.html file
+#### Option 2 - Moving the index.html file
 Moving the index.html file inside src/main/resource/static would allow spring boot to serve the index.html by default without a need from a controller. Spring boot will automatically add static web sources located in such directory
 
 I chose option 2 and removed the logic from the controller as this was no longer necessary. I interpreted that we're allowed to do such architectural changes. An argument for choosing option 2 is that I believe this is a more common way of serving static content, and this is how my previous classes has served static content.
