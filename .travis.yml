@@ -14,7 +14,7 @@ services:
 #Set env variables (Only available during build process).
 env:
   global:
-    - GCP_PROJECT_ID=decisive-mapper-306016
+    - GCP_PROJECT_ID=konteproj0
     - IMAGE=gcr.io/decisive-mapper-306016/helloworld
     #Disable cloud from asking us about input
     - CLOUDSDK_CORE_DISABLE_PROMPTS=1
