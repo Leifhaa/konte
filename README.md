@@ -77,5 +77,5 @@ env:
 ```
 
 ## 2. Append service account key file
-Travis needs a key file in order authenticate and push the built image to google. Complete step 5 and 6 in [this guide](#https://github.com/Leifhaa/PGR301-2020-konte-oppgave2#5-encrypt-service-account-key-file) for adding a keyfile to travis, but replace ```terraform_keyfile.json``` with ```google_keyfile.json``` while completing the steps
+Travis needs a key file in order authenticate and push the built image to google. Complete step 5 and 6 in [this guide](#https://github.com/Leifhaa/PGR301-2020-konte-oppgave2#5-encrypt-service-account-key-file) for adding a keyfile to travis, but replace ```terraform_keyfile.json``` with ```google_keyfile.json``` while completing the steps.
 
