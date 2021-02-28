@@ -25,10 +25,10 @@ Here's a discription of the arguments
 | -p 8080:9999 | Forwarding ports, so a request on 8080 to our machine, is forwarded to port 9999 in the container |
 | konte:latest | Specifies which container image to run, following by which tag (latest in this case) |
 
-In summary, this command will start a container of the latest image on our local port 8080
+In summary, this command will start a container of the latest image accessible on port 8080 on your local machine.
 
-#####Handling "404 not found"
-The original code would return a "404 not found" whenever run in container. Personally I experienced this due to index.html not being found inside the docker. This could be fixed in several ways:
+##### Handling "404 not found"
+The original code would return a "404 not found" whenever ran in container. Personally I experienced this due to index.html not being found inside the docker. This could be fixed in several ways:
 ########Option 1 - Adapting the docker file
 Add the following command in stage 2 of the docker file:
 ```
