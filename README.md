@@ -8,15 +8,15 @@ This is repository 1/2 of [exam in lecture pgr301 (Continuation exam)](https://g
 ## Prerequisites before running the guides:
 * Installed Terraform (https://www.terraform.io/downloads.html)
 
-## Task 1 - Docker 
-### Task A
+# Task 1 - Docker 
+## Task A
 This project contains a multistaged docker file named `Dockerfile` for creating a Container Image of the spring boot application.<br />
 For creating a docker image, open terminal in root directory and run:
 ```shell script
 docker build . --tag konte
 ```
 
-### Task B
+## Task B
 In order to run a container of the newest container image, run the following command:
 ```shell script
 docker run -d --name hello-konte -p 8080:9999  konte:latest
@@ -32,9 +32,9 @@ Here's a description of the arguments
 
 In summary, this command will start a container of the latest image accessible on port 8080 on your local machine.
 
-### Handling "404 not found"
+## Handling "404 not found"
 The original code would return a "404 not found" whenever ran in container. Personally I experienced this due to `index.html` not being found inside the docker. This could be fixed in several ways:
-#### Option 1 - Adapting the docker file
+### Option 1 - Adapting the docker file
 Adding command for copying index.html file in stage 2 of the docker file as shown below:
 ``` diff
 FROM adoptopenjdk/openjdk11:alpine-slim
@@ -45,7 +45,7 @@ ENTRYPOINT ["java", "-jar", "application.jar"]
 ```
 This will copy the `index.html` into the app directory as well, and our application is able to access index.html when running in docker
 
-#### Option 2 - Moving the index.html file
+### Option 2 - Moving the index.html file
 Moving the `index.html` file inside `src/main/resource/static` would include it in the .jar file and allow spring boot to serve the `index.html` by default. This means there's longer need for the controller to serve the `index.html`. This option requires no adjustments in the docker file
 
 ### Selecting an option
@@ -61,5 +61,8 @@ There could also be other explainations why "404 not found" could occur when run
 - Trying to access http://localhost:9999/ instead of http://localhost:8080/ when application is running in docker
 - Missing argument -p 8080:9999 when running ````docker run...```` 
 
-
+# Travis & Google Cloud 
+:information_source: This is not a task in the exam. Completing this part is not necessary and can be skipped :information_source: <br />
+I decided to add an extension to the project, allowing travis to build the docker image for us and deploying it on Google. Here's a brief explanation of how:
+" 
 
