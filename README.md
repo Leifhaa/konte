@@ -10,7 +10,7 @@ This is repository 1/2 of [exam in lecture pgr301 (Continuation exam)](https://g
 ## Prerequisites before running the guides:
 * Installed Terraform (https://www.terraform.io/downloads.html)
 
-# Task 1 - Docker 
+# Task 1. Docker 
 ## Task A
 This project contains a multistaged docker file named `Dockerfile` for creating a Container Image of the spring boot application.<br />
 For creating a docker image, open terminal in root directory and run:
