@@ -27,15 +27,15 @@ Here's a discription of the arguments
 
 In summary, this command will start a container of the latest image accessible on port 8080 on your local machine.
 
-##### Handling "404 not found"
+### Handling "404 not found"
 The original code would return a "404 not found" whenever ran in container. Personally I experienced this due to index.html not being found inside the docker. This could be fixed in several ways:
-########Option 1 - Adapting the docker file
+#### Option 1 - Adapting the docker file
 Add the following command in stage 2 of the docker file:
-```
+``` diff
 FROM adoptopenjdk/openjdk11:alpine-slim
 WORKDIR /app
 COPY --from=builder /app/target/*.jar application.jar
-COPY index.html .                     (<------------- ADDED LINE)
++ COPY index.html .                     (<------------- ADDED LINE)
 ENTRYPOINT ["java", "-jar", "application.jar"]
 ```
 This will copy the index.html into the app directory as well, and our application is able to access index.html when running in docker
