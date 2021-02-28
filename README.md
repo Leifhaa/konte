@@ -1,118 +1,64 @@
-# Konteeksamen 2020 PGR301
+# Multistage docker build
+![](./docs/docker.png) <br>
 
-## Hvordan levere
+## Introduction
+This is repository 1/2 of [exam in lecture pgr301 (Continuation exam)](https://github.com/Leifhaa/PGR301-2020-konte-oppgave2/tree/master/docs). Repository 2/2 can be found [here](https://github.com/Leifhaa/PGR301-2020-konte-oppgave2).
 
-Besvarelsen skal bestå av et dokument med følgende opplysninger
+## Prerequisites before running the guides:
+* Installed Terraform (https://www.terraform.io/downloads.html)
 
-- Lenke til en fork  du lager av https://github.com/PGR301-2020/konte 
-- Lenke til ditt eget repository du lager i oppgave 2
-
-I din fork kan du slette denne README filen og erstatte den med din egen.
-
-## Oppgave 1 - Docker 
-
-I din fork av https://github.com/PGR301-2020/konte. Se i mappen *oppgave1-docker*
-
-Her finner du en Spring Boot applikasjon som er satt opp som en veldig enkel HTTP server.
-Når en nettleser åpne http://localhost:9999/ vil index.html som ligger i denne mappen 
-vises og vise "Hello World".
-
-### Oppgave A
-
-Du skal skrive en Dockerfile som lager et Docker Container image av Spring Boot appen. 
-Sensor vil *kun* gjøre følgede kommando fra denne mappen for å teste, altså ikke bygge applikasjonen med maven først.
-
-
-```bash
+## Task 1 - Docker 
+### Task A
+This project contains a multistaged docker file named `Dockerfile` for creating a Container Image of the spring boot application.<br />
+For creating a docker image, open terminal in root directory and run:
+```shell script
 docker build . --tag konte
 ```
 
-### Oppgave B
-
-Beskriv hvilken kommando ```docker run ... ``` sensor må skrive inn i terminalen sin for å starte en container fra det nyeste container image som er laget. 
-
-På lokal  maskin skal applikasjonen lytte på port 8080. Spring Boot applikasjonen skal fortsatt lytte på 9999. 
-
-Som du sikkert vil legge merke til, så vil du få en "404 not found" når du kjører applikasjonen i container. Forklar hvorfor dette skjer i README, 
-
-Gjør nødvendige endringer i applikasjonen og Dockerfile for å fikse problemet. 
-
-# Oppgave 2- GCP og Terraform
-
-Før du starter på oppgaven, sørg for å ha Gloud SDK og Terraform innstalert. 
-
-Nyttige lenker
-
-* https://www.terraform.io/downloads.html
-* https://cloud.google.com/sdk/docs/install
-
-Oppgave
-
-* Lag et nytt repository.
-* Lag en ny mappe som heter "init"
-
-I init-mappen skal du skrive nødvendig terraformkode for å lage en Google Cloud Storage *Bucket* som du i neste oppgave skal bruke til å lagre state for Terraform/Travis.
-
-Viktig, Navn på bucket skal ikke hardkodes i terraform-filene men settes fra en terraform variabel deklarert slik
-
-```hcl-terraform
-
-variable "bucket_name" {
-}
-
+### Task B
+In order to run a container of the newest container image, run the following command:
+```shell script
+docker run -d --name hello-konte -p 8080:9999  konte:latest
 ```
+Here's a discription of the arguments
 
-Denne variabelen skal få sin verdi fra en miljøvariabel satt med ```export XYZ_```(linux/mac) eller ```set XYZ```(windows). 
+| Argument | Description |
+| --- | --- |
+| -d | Run detached, means that docker container runs in the background of the terminal. |
+| --name hello-konte | Assigns a name to the container, otherwise this name is randomly created. |
+| -p 8080:9999 | Forwarding ports, so a request on 8080 to our machine, is forwarded to port 9999 in the container |
+| konte:latest | Specifies which container image to run, following by which tag (latest in this case) |
 
-* I readme skal du beskrive hvordan sensor skal sette denne variabelen.
-* I Readme: beskriv hva sensor må gjøre for å kunne bruke sin egen Service Account og GCP nøkkel-fil i Json format.
+In summary, this command will start a container of the latest image accessible on port 8080 on your local machine.
 
-Sensor vi i denne oppgaven 
-
-* Lage en fork av ditt repository
-* Selv installere og konfigurere Gloud SDK og Terraform. (Gcloud init osv)
-* Gjøre nødvendige endringer i filer i følge instruksjoner du har gitt i README
-* Sette miljøvariabel for bucket navn i henhold til din README
-* Kjøre ```terraform init ; terradform apply``` i init mappen. 
-* Sensor sjekker at en bucket blir opprettet i sin GCP konto 
-   
-# Oppgave 3 - Travis Terraform pipeline 
-
-I denne oppgaven skal du lage en Travis pipeline for infrastrukturkode som kan provisjonere GCP ressurser med Terraform. 
-
-Prosjektet skal bruke bucket fra oppgave 2 som "backend" for state. Pipeline skal bruke ressurstypen 
-
+### Handling "404 not found"
+The original code would return a "404 not found" whenever ran in container. Personally I experienced this due to `index.html` not being found inside the docker. This could be fixed in several ways:
+#### Option 1 - Adapting the docker file
+Adding command for copying index.html file in stage 2 of the docker file as shown below:
+``` diff
+FROM adoptopenjdk/openjdk11:alpine-slim
+WORKDIR /app
+COPY --from=builder /app/target/*.jar application.jar
++ COPY index.html .                     
+ENTRYPOINT ["java", "-jar", "application.jar"]
 ```
-resource "google_compute_instance" "name" {
-}
-```
+This will copy the `index.html` into the app directory as well, and our application is able to access index.html when running in docker
 
-For å provisjonere en virtuell server. (se https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_instance)
+#### Option 2 - Moving the index.html file
+Moving the `index.html` file inside `src/main/resource/static` would include it in the .jar file and allow spring boot to serve the `index.html` by default. This means there's longer need for the controller to serve the `index.html`. This option requires no adjustments in the docker file
 
-Travis pipeline skal 
+### Selecting an option
+I chose option 2 and removed the logic from the controller as this was no longer necessary. I interpreted that we're allowed to do such architectural changes. If moving `index.html` would not be allowed, or changing the controller logic was not OK then option 2 would be out of scope. 
+<br />
+<br />
+An argument for choosing option 2 is that I believe this is a more common way of serving static content, and this is how my previous classes has served static content. Anther reason why I chose option 2 is that Option 1 doesn't scale well. If I'd want to add a new .html file, I'd also have to add a new COPY command inside docker file which opens for more errors.
 
-- Installere Gcloud SDK 
-- Autentisere seg mot Google Cloud Platform med en Service Account. 
-- Sette et GCloud prosjekt 
-- Laste ned,pakke ut og installere terraform slik at Travis kan kjøre Terraformkode
-- Kjøre terraformkode i repositoryiet 
+After these changes, I was able to run & view the index page on http://localhost:8080/
 
-Viktig
+#### Other reasons for 404
+There could also be other explainations why "404 not found" could occur when running the app in container. Some of the more common ones is:
+- Trying to access http://localhost:9999/ instead of http://localhost:8080/ when application is running in docker
+- Missing argument -p 8080:9999 when running ````docker run...```` 
 
-* Travis skal bare gjøre kjøre påendringer i main/master branch 
-* Verdien *machine_type* for terraform ressursen *google_compute_instance* skal settes fra en environmentvariabel satt i Travis. Se hva Sensor vil gjøre i beskrivelsen under
-* Hint: Å lage en ny compute instance kan kreve at du legger på roller til Service Account i forhold til det vi har gjort i semesteret.
 
-Sensor vil i denne oppgaven
 
-- Lage en fork av ditt repository 
-- Sjekke din README for å se hvilke hemmeligheter som må settes med travis encrypt, og travis encrypt-file - og følge 
-andre instruksjoner. Det er viktig at README i repository forklarer på en god måte hva sensor må gjøre for å kunne bruke sin egen Google konto.  
-- Sensor setter en environment variabel for Travisbygget  
- ```
-travis env set TF_ENV_machine_type f1-micro --public
-```
-- Starte et bygg av main/master og sjekke at Travis kjører Terraform 
-- Gjøre en edring på infrastruktor kode, på en annen branch. Sjekke at Travis ikke kjører Terraform
-
-Lykke til !
