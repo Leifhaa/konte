@@ -9,7 +9,7 @@ This is repository 1/2 of [exam in lecture pgr301 (Continuation exam)](https://g
 
 ## Prerequisites before running the guides:
 * Installed Terraform (https://www.terraform.io/downloads.html)
-* Installed docker (https://www.docker.com/)
+* Installed Docker (https://www.docker.com/)
 
 # Task 1. Docker 
 ## Task A
