@@ -1,0 +1,39 @@
+language: java
+
+jdk: openjdk11
+
+cache:
+  directories:
+    - ".autoconf"
+    - "$HOME/.m2"
+
+#Enable travis to use docker
+services:
+  - docker
+
+#Set env variables (Only available during build process).
+env:
+  global:
+    - GCP_PROJECT_ID=decisive-mapper-306016
+    #Disable cloud from asking us about input
+    - CLOUDSDK_CORE_DISABLE_PROMPTS=1
+
+before_install:
+  #Google service account JSON file which is encrypted by "travis encrypt-file"
+  #Travis will decrypt this and do the remaining build process
+  - openssl aes-256-cbc -K $encrypted_98d237b7dbf4_key -iv $encrypted_98d237b7dbf4_iv -in google-key.json.enc -out google-key.json -d
+  #Download google cloud sdk and install it
+  - curl https://sdk.cloud.google.com | bash > /dev/null
+  - source "$HOME/google-cloud-sdk/path.bash.inc"
+  #Use the encrypted file for activating google service account.
+  - gcloud auth activate-service-account --key-file=google-key.json
+  - gcloud auth configure-docker
+  - gcloud config set project "${GCP_PROJECT_ID}"
+
+
+#Push particular branch to remote registry after tests succeeds
+deploy:
+  provider: script
+  script: bash ./travis/docker_push
+  on:
+    branch: main
