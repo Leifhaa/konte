@@ -14,8 +14,8 @@ services:
 #Set env variables (Only available during build process).
 env:
   global:
-    - GCP_PROJECT_ID=hello-konte-2
-    - IMAGE=gcr.io/hello-konte-2/helloworld
+    - GCP_PROJECT_ID=hello-konte-5
+    - IMAGE=gcr.io/hello-konte-5/helloworld
     #Disable cloud from asking us about input
     - CLOUDSDK_CORE_DISABLE_PROMPTS=1
 
