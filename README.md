@@ -103,5 +103,4 @@ Travis needs a key file in order authenticate and push the built image to google
 >Notice: Replace master with main when pushing as this repository has a main branch.
 ## 4 Trigger a travis build
 Trigger a travis build by committing a change to main/master branch. After a couple of minutes, you should have a docker image in your Google Container Registry. Travis built it for us! :clap:
-Todo: Må enable API's:
-https://stackoverflow.com/questions/58733523/google-cloud-platform-warning-you-do-not-appear-to-have-access-to-project-pro
+
